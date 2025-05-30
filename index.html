@@ -88,58 +88,100 @@
         </div>
     </section>
 
-     <!-- Projects Section -->
-     <section class="projects-section">
-        <div class="projects-container">
-            <div class="projects-left">
-                <div class="project-slider">
-                    <div class="project-card active" data-project="1">
-                        <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-                        <div class="project-overlay">
-                            <div class="project-location">Parklands</div>
-                            <div class="project-name">APT 254</div>
-                            <button class="view-details-project">VIEW ALL DETAILS</button>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card" data-project="2">
-                        <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-                        <div class="project-overlay">
-                            <div class="project-location">Westlands</div>
-                            <div class="project-name">VISTA 360</div>
-                            <button class="view-details-project">VIEW ALL DETAILS</button>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card" data-project="3">
-                        <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
-                        <div class="project-overlay">
-                            <div class="project-location">Karen</div>
-                            <div class="project-name">GREEN VALLEY</div>
-                            <button class="view-details-project">VIEW ALL DETAILS</button>
-                        </div>
+<!-- Projects Section HTML -->
+<section class="projects-section">
+    <div class="projects-container">
+        <div class="projects-left">
+            <div class="project-slider">
+                <div class="project-card" data-index="0" data-position="active">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="project-overlay">
+                        <div class="project-location">Parklands</div>
+                        <div class="project-name">APT 254</div>
+                        <button class="view-details-project">VIEW ALL DETAILS</button>
                     </div>
                 </div>
-                <div class="scroll-indicator">
-                    <div class="scroll-arrow">↓</div>
+                
+                <div class="project-card" data-index="1" data-position="next">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="project-overlay">
+                        <div class="project-location">Westlands</div>
+                        <div class="project-name">VISTA 360</div>
+                        <button class="view-details-project">VIEW ALL DETAILS</button>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-index="2" data-position="hidden">
+                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="project-overlay">
+                        <div class="project-location">Karen</div>
+                        <div class="project-name">GREEN VALLEY</div>
+                        <button class="view-details-project">VIEW ALL DETAILS</button>
+                    </div>
                 </div>
             </div>
             
-            <div class="projects-right">
-                <div class="projects-content">
-                    <h2>OUR PROJECTS</h2>
-                    <div class="projects-description">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    </div>
-                    <button class="view-all-projects">VIEW ALL PROJECTS</button>
-                </div>
+            <!-- Navigation arrows -->
+            <div class="slider-nav">
+                <button class="nav-arrow prev-arrow" onclick="navigateSlider('prev')">←</button>
+                <button class="nav-arrow next-arrow" onclick="navigateSlider('next')">→</button>
             </div>
         </div>
-    </section>
+        
+        <div class="projects-right">
+            <div class="projects-content">
+                <h2>OUR PROJECTS</h2>
+                <div class="project-overview">
+                    <div class="overview-item active" data-project="0">
+                        <h3>APT 254 - Parklands</h3>
+                        <p>Modern luxury apartments in the heart of Parklands, featuring contemporary design and premium amenities. Each unit offers spacious living areas with panoramic city views.</p>
+                        <div class="project-specs">
+                            <div class="spec">
+                                <span class="spec-label">Units:</span>
+                                <span class="spec-value">24 Apartments</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-label">Status:</span>
+                                <span class="spec-value">Available</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-item" data-project="1">
+                        <h3>VISTA 360 - Westlands</h3>
+                        <p>Premium residential complex offering 360-degree views of Nairobi's skyline. Features state-of-the-art facilities and smart home technology integration.</p>
+                        <div class="project-specs">
+                            <div class="spec">
+                                <span class="spec-label">Units:</span>
+                                <span class="spec-value">36 Apartments</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-label">Status:</span>
+                                <span class="spec-value">Pre-launch</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-item" data-project="2">
+                        <h3>GREEN VALLEY - Karen</h3>
+                        <p>Eco-friendly residential development nestled in Karen's serene environment. Sustainable living meets luxury in this exclusive gated community.</p>
+                        <div class="project-specs">
+                            <div class="spec">
+                                <span class="spec-label">Units:</span>
+                                <span class="spec-value">18 Villas</span>
+                            </div>
+                            <div class="spec">
+                                <span class="spec-label">Status:</span>
+                                <span class="spec-value">Sold Out</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="view-all-projects">VIEW ALL PROJECTS</button>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- Beach Section -->
     <section class="beach-section fade-in">

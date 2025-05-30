@@ -82,58 +82,68 @@ document.querySelectorAll(".gallery-item").forEach((item) => {
 //     }, 1000);
 // }, 3000);
 // Projects Section Scroll Animation
-let currentProjectIndex = 0;
-const projectCards = document.querySelectorAll(".project-card");
-const projectsSection = document.querySelector(".projects-section");
 
-function updateActiveProject(index) {
-  projectCards.forEach((card, i) => {
-    card.classList.toggle("active", i === index);
+let currentSlideIndex = 0;
+const totalSlides = 3;
+
+// Update card positions based on current index
+function updateCardPositions() {
+  const cards = document.querySelectorAll(".project-card");
+  const overviewItems = document.querySelectorAll(".overview-item");
+
+  cards.forEach((card, index) => {
+    const cardIndex = parseInt(card.dataset.index);
+    let position;
+
+    if (cardIndex === currentSlideIndex) {
+      position = "active";
+    } else if (
+      cardIndex ===
+      (currentSlideIndex - 1 + totalSlides) % totalSlides
+    ) {
+      position = "prev";
+    } else if (cardIndex === (currentSlideIndex + 1) % totalSlides) {
+      position = "next";
+    } else {
+      position = "hidden";
+    }
+
+    card.setAttribute("data-position", position);
+  });
+
+  // Update overview content
+  overviewItems.forEach((item, index) => {
+    item.classList.toggle("active", index === currentSlideIndex);
   });
 }
 
-// Handle scroll within projects section
-function handleProjectsScroll() {
-  if (!projectsSection || projectCards.length === 0) return;
-
-  const rect = projectsSection.getBoundingClientRect();
-  const sectionHeight = projectsSection.offsetHeight;
-  const viewportHeight = window.innerHeight;
-
-  // Check if projects section is in view
-  if (rect.top <= viewportHeight && rect.bottom >= 0) {
-    let scrollProgress = 0;
-
-    if (rect.top <= 0) {
-      // We're scrolling through the section
-      scrollProgress =
-        Math.abs(rect.top) / Math.max(sectionHeight - viewportHeight, 1);
-    } else {
-      // Section is coming into view
-      scrollProgress = 0;
-    }
-
-    // Clamp scroll progress between 0 and 1
-    scrollProgress = Math.max(0, Math.min(scrollProgress, 1));
-
-    // Calculate which project should be active
-    const totalProjects = projectCards.length;
-    const projectIndex = Math.floor(scrollProgress * totalProjects);
-    const clampedIndex = Math.max(0, Math.min(projectIndex, totalProjects - 1));
-
-    if (clampedIndex !== currentProjectIndex) {
-      currentProjectIndex = clampedIndex;
-      updateActiveProject(currentProjectIndex);
-    }
+// Navigate slider
+function navigateSlider(direction) {
+  if (direction === "next") {
+    currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+  } else {
+    currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
   }
+  updateCardPositions();
 }
 
-// Add scroll event listener
-window.addEventListener("scroll", handleProjectsScroll);
+// Auto-advance slider every 5 seconds
+setInterval(() => {
+  navigateSlider("next");
+}, 5000);
 
-// Initialize first project as active when DOM is loaded
+// Click on cards to navigate
+document.querySelectorAll(".project-card").forEach((card) => {
+  card.addEventListener("click", () => {
+    const clickedIndex = parseInt(card.dataset.index);
+    if (clickedIndex !== currentSlideIndex) {
+      currentSlideIndex = clickedIndex;
+      updateCardPositions();
+    }
+  });
+});
+
+// Initialize on page load
 document.addEventListener("DOMContentLoaded", () => {
-  if (projectCards.length > 0) {
-    updateActiveProject(0);
-  }
+  updateCardPositions();
 });
